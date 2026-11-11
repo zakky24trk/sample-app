@@ -1,5 +1,6 @@
 #!/bin/bash
 
+rm -rf tempdir
 mkdir tempdir
 mkdir tempdir/templates
 mkdir tempdir/static
@@ -17,6 +18,6 @@ echo "EXPOSE 5050" >> tempdir/Dockerfile
 echo "CMD python3 /home/myapp/sample_app.py" >> tempdir/Dockerfile
 
 cd tempdir
-docker build --security-opt seccomp=unconfined -t sampleapp .
-docker run -t -d --security-opt seccomp=unconfined -p 5050:5050 --name samplerunning sampleapp
+docker build -t sampleapp .
+docker run -t -d -p 5050:5050 --name samplerunning sampleapp
 docker ps -a
